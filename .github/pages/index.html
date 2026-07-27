@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>DATIQA.AI</title>
+    <meta http-equiv="refresh" content="0; url=__BASE_PATH__/en/" />
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        background: #f5f5f4;
+        color: #4a4a4a;
+        font-family: ui-sans-serif, system-ui, sans-serif;
+      }
+      @media (prefers-color-scheme: dark) {
+        html,
+        body {
+          background: #0e0e0e;
+          color: #d9d9d9;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      // Static hosting has no proxy, so the locale pick happens here instead:
+      // a previous manual choice wins, otherwise the browser language decides.
+      (function () {
+        var supported = ["en", "sk", "cs", "de"];
+        var match = document.cookie.match(/(?:^|;\s*)locale=([^;]+)/);
+        var chosen = match && supported.indexOf(match[1]) !== -1 ? match[1] : null;
+        if (!chosen) {
+          var langs = navigator.languages || [navigator.language || "en"];
+          for (var i = 0; i < langs.length && !chosen; i++) {
+            var tag = String(langs[i]).toLowerCase().split("-")[0];
+            if (supported.indexOf(tag) !== -1) chosen = tag;
+          }
+        }
+        location.replace("__BASE_PATH__/" + (chosen || "en") + "/");
+      })();
+    </script>
+  </body>
+</html>

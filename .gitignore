@@ -24,6 +24,9 @@
 .DS_Store
 *.pem
 
+# local-only backups (e.g. the real copy behind the placeholder text)
+*.bak
+
 # debug
 npm-debug.log*
 yarn-debug.log*
