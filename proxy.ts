@@ -4,7 +4,7 @@ import { locales, defaultLocale, isLocale, type Locale } from "@/lib/i18n";
 /**
  * Locale detection: a manually chosen locale (cookie, set by the footer
  * switcher) always wins; otherwise the browser's Accept-Language decides —
- * sk → Slovak, cs → Czech, de (DE/AT/CH) → German, anything else → English.
+ * sk → Slovak, cs → Czech, anything else → English.
  */
 function detectLocale(request: NextRequest): Locale {
   const cookie = request.cookies.get("locale")?.value;
@@ -15,7 +15,6 @@ function detectLocale(request: NextRequest): Locale {
     const lang = part.split(";")[0].trim().toLowerCase();
     if (lang.startsWith("sk")) return "sk";
     if (lang.startsWith("cs")) return "cs";
-    if (lang.startsWith("de")) return "de";
     if (lang.startsWith("en")) return "en";
   }
   return defaultLocale;

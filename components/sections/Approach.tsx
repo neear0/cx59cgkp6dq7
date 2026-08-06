@@ -49,7 +49,7 @@ export default function Approach({ dict }: { dict: Dict["approach"] }) {
 
             <SplitReveal
               as="h2"
-              className="font-display text-[clamp(2rem,4.5vw,3.4rem)] font-bold uppercase leading-[1.02] tracking-tight text-ink"
+              className="font-display text-[clamp(1.8rem,4.5vw,3.4rem)] font-bold uppercase leading-[1.02] tracking-tight text-ink"
             >
               {dict.heading}
             </SplitReveal>

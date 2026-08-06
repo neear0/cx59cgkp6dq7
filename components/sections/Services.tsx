@@ -8,16 +8,20 @@ export default function Services({ dict }: { dict: Dict["services"] }) {
     <section id="services" className="relative px-6 py-32 md:py-44">
       <div className="mx-auto max-w-6xl">
         {/* content keeps to the left — the particle formation flows right */}
-        <div className="md:max-w-[36rem]">
+        <div className="md:max-w-[38rem]">
           <div className="scrim">
             <FadeReveal>
               <p className="mb-6 font-mono text-[11px] uppercase tracking-[0.4em] text-mute">
                 {dict.eyebrow}
               </p>
             </FadeReveal>
+            {/* smaller than the other section headings — this one carries a
+                three-sentence claim, not a few words. The 1.4rem floor is set
+                by "TRANSFORMATION." at 320px: wider than that and the char
+                masks break it mid-word. */}
             <SplitReveal
               as="h2"
-              className="font-display text-[clamp(2rem,4.5vw,3.4rem)] font-bold uppercase leading-[1.02] tracking-tight text-ink"
+              className="font-display text-[clamp(1.4rem,3.6vw,2.6rem)] font-bold uppercase leading-[1.08] tracking-tight text-ink"
             >
               {dict.heading}
             </SplitReveal>
@@ -30,10 +34,12 @@ export default function Services({ dict }: { dict: Dict["services"] }) {
                   href="#contact"
                   className="group block border-t border-line py-8 transition-colors duration-500 last:border-b hover:bg-card/40"
                 >
-                  <span className="font-mono text-[10px] uppercase tracking-[0.35em] text-mute transition-colors duration-500 group-hover:text-ink">
-                    {s.tag}
-                  </span>
-                  <div className="mt-2 flex items-baseline justify-between gap-4">
+                  {s.tag && (
+                    <span className="font-mono text-[10px] uppercase tracking-[0.35em] text-mute transition-colors duration-500 group-hover:text-ink">
+                      {s.tag}
+                    </span>
+                  )}
+                  <div className={`flex items-baseline justify-between gap-4 ${s.tag ? "mt-2" : ""}`}>
                     <h3 className="font-display text-2xl font-bold text-ink transition-transform duration-500 group-hover:translate-x-2 md:text-3xl">
                       {s.title}
                     </h3>
@@ -44,9 +50,11 @@ export default function Services({ dict }: { dict: Dict["services"] }) {
                       →
                     </span>
                   </div>
-                  <p className="mt-3 text-sm leading-relaxed text-ink2 md:text-base">
-                    {s.text}
-                  </p>
+                  {s.text && (
+                    <p className="mt-3 text-sm leading-relaxed text-ink2 md:text-base">
+                      {s.text}
+                    </p>
+                  )}
                   <span className="mt-6 block h-px w-0 gradient-line transition-all duration-700 group-hover:w-full" />
                 </a>
               </FadeReveal>

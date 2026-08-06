@@ -1,8 +1,12 @@
 # DATIQA.AI — design preview
 
-Public preview build of the DATIQA.AI one-pager. All body copy is placeholder
-(lorem ipsum) — only the slogan is real. This repo exists to have the design
-viewable online; it is not the production site.
+Public preview build of the DATIQA.AI one-pager. This repo exists to have the
+design viewable online; it is not the production site.
+
+Copy comes from the client (`Datiqa.ai.docx`) where she supplied it — the
+services heading, the four index rows and the closing claim. The approach and
+process sections are still our own draft text, and the three figures in the
+approach section are placeholders awaiting confirmed numbers.
 
 ## Stack
 
@@ -16,7 +20,7 @@ npm install
 npm run dev
 ```
 
-Locales live in `lib/i18n.ts` (`en`, `sk`, `cs`, `de`); routes are
+Locales live in `lib/i18n.ts` (`en`, `sk`, `cs`); routes are
 `app/[locale]/`, and `proxy.ts` redirects `/` to the visitor's language.
 
 ## Deployment

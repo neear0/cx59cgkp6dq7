@@ -29,7 +29,7 @@
       // Static hosting has no proxy, so the locale pick happens here instead:
       // a previous manual choice wins, otherwise the browser language decides.
       (function () {
-        var supported = ["en", "sk", "cs", "de"];
+        var supported = ["en", "sk", "cs"];
         var match = document.cookie.match(/(?:^|;\s*)locale=([^;]+)/);
         var chosen = match && supported.indexOf(match[1]) !== -1 ? match[1] : null;
         if (!chosen) {
