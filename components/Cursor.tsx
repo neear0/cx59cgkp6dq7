@@ -59,14 +59,17 @@ export default function Cursor() {
 
   return (
     <>
+      {/* `invisible` is the initial state: on touch devices the effect above
+          bails out early, and without it the dot and ring would sit parked in
+          the top-left corner of the screen */}
       <div
         ref={dotRef}
-        className="pointer-events-none fixed left-0 top-0 z-[100] h-1.5 w-1.5 rounded-full gradient-line"
+        className="pointer-events-none invisible fixed left-0 top-0 z-[100] h-1.5 w-1.5 rounded-full gradient-line"
         aria-hidden
       />
       <div
         ref={ringRef}
-        className="pointer-events-none fixed left-0 top-0 z-[100] h-8 w-8 rounded-full border border-ink/40 opacity-50"
+        className="pointer-events-none invisible fixed left-0 top-0 z-[100] h-8 w-8 rounded-full border border-ink/40 opacity-50"
         aria-hidden
       />
     </>

@@ -218,7 +218,12 @@ export default function ParticleField() {
   useEffect(() => setMounted(true), []);
 
   return (
-    <div className="fixed inset-0 z-0 pointer-events-none" aria-hidden>
+    // the same 12k points cover a phone screen far more densely than a desktop
+    // one, to the point where copy stops being readable — hence the dimming
+    <div
+      className="pointer-events-none fixed inset-0 z-0 opacity-50 md:opacity-100"
+      aria-hidden
+    >
       {mounted && (
         <Canvas
           dpr={[1, 1.8]}

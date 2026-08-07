@@ -100,6 +100,14 @@ body {
   box-shadow: 0 0 52px 42px rgba(74, 74, 74, 0.7);
   pointer-events: none;
 }
+/* the particle field fills a phone screen edge to edge, so the halo has to
+   carry more weight there than it does on a desktop */
+@media (max-width: 767px) {
+  .scrim::before {
+    background: rgba(74, 74, 74, 0.86);
+    box-shadow: 0 0 44px 34px rgba(74, 74, 74, 0.86);
+  }
+}
 
 /* Soft glass panel, used sparingly */
 .glass {
@@ -107,6 +115,45 @@ body {
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Build credit in the footer. The colours are the linked studios' own:
+   voidsolutions red (--red-bright) and lumaweb blue (--ac). Each pair swaps
+   its two colours on hover, so both marks read as one signature. */
+.mark {
+  --void-red: #ff3b3f;
+  --luma-blue: #7eb3ff;
+  --mark-idle: #cfcfcf;
+  opacity: 0.72;
+  transition: opacity 0.45s cubic-bezier(0.65, 0, 0.35, 1);
+}
+.mark:hover {
+  opacity: 1;
+}
+.mark-a,
+.mark-b,
+.mark-c,
+.mark-d {
+  transition: color 0.45s cubic-bezier(0.65, 0, 0.35, 1);
+}
+.mark-a {
+  color: var(--void-red);
+}
+.mark-b {
+  color: var(--mark-idle);
+}
+/* the lumaweb line keeps its colours on hover — only the opacity lifts */
+.mark-c {
+  color: var(--luma-blue);
+}
+.mark-d {
+  color: #f5f5f5;
+}
+.mark:hover .mark-a {
+  color: var(--mark-idle);
+}
+.mark:hover .mark-b {
+  color: var(--void-red);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -122,4 +169,13 @@ body {
 :focus-visible {
   outline: 2px solid #b15eff;
   outline-offset: 3px;
+}
+
+/* Underline form fields: a focus box drawn around a single rule looks broken,
+   so the underline itself thickens and tints instead. */
+.field:focus-visible {
+  outline: none;
+  border-bottom-color: #b15eff;
+  box-shadow: 0 1px 0 0 #b15eff;
+  background: rgba(255, 255, 255, 0.03);
 }

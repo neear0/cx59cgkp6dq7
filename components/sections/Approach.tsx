@@ -36,7 +36,11 @@ export default function Approach({ dict }: { dict: Dict["approach"] }) {
   );
 
   return (
-    <section ref={root} id="approach" className="relative px-6 py-32 md:py-44">
+    <section
+      ref={root}
+      id="approach"
+      className="relative px-6 py-32 md:px-12 md:py-44 lg:px-20"
+    >
       <div className="mx-auto max-w-6xl">
         {/* content keeps to the right — the particle formation flows left */}
         <div className="md:ml-auto md:max-w-[36rem]">
@@ -63,7 +67,7 @@ export default function Approach({ dict }: { dict: Dict["approach"] }) {
 
           <div className="mt-20 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-line bg-line">
             {dict.stats.map((s) => (
-              <FadeReveal key={s.label} className="bg-card/60 p-8">
+              <FadeReveal key={s.label} className="bg-card/85 p-8 md:bg-card/60">
                 <div className="flex flex-wrap items-baseline justify-between gap-4">
                   <p className="font-display text-5xl font-bold text-ink">
                     <span data-count={s.value} data-decimals={s.decimals}>

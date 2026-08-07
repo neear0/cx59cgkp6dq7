@@ -75,30 +75,33 @@ export default function Hero({ dict }: { dict: Dict["hero"] }) {
     <section
       ref={root}
       id="top"
-      className="relative flex min-h-svh flex-col items-center justify-center px-6 pb-28 pt-32 text-center"
+      className="relative flex min-h-svh flex-col items-center justify-center px-6 pb-28 pt-32 text-center md:px-12 lg:px-20"
     >
-      <p
-        data-hero-eyebrow
-        className="mb-8 font-mono text-[11px] uppercase tracking-[0.4em] text-mute"
-      >
-        {dict.eyebrow}
-      </p>
+      {/* the halo keeps the copy legible where the particle field is densest */}
+      <div className="scrim flex flex-col items-center">
+        <p
+          data-hero-eyebrow
+          className="mb-8 font-mono text-[11px] uppercase tracking-[0.4em] text-mute"
+        >
+          {dict.eyebrow}
+        </p>
 
-      <h1
-        data-hero-title
-        className="font-display max-w-6xl text-[clamp(1.6rem,5.8vw,5rem)] font-extrabold uppercase leading-[1.02] tracking-tight text-ink"
-      >
-        {dict.title.pre}
-        <span className="text-gradient">{dict.title.highlight}</span>
-        {dict.title.post}
-      </h1>
+        <h1
+          data-hero-title
+          className="font-display max-w-6xl text-[clamp(1.6rem,5.8vw,5rem)] font-extrabold uppercase leading-[1.02] tracking-tight text-ink"
+        >
+          {dict.title.pre}
+          <span className="text-gradient">{dict.title.highlight}</span>
+          {dict.title.post}
+        </h1>
 
-      <p
-        data-hero-sub
-        className="mt-8 max-w-xl text-balance text-base leading-relaxed text-ink2 md:text-lg"
-      >
-        {dict.sub}
-      </p>
+        <p
+          data-hero-sub
+          className="mt-8 max-w-xl text-balance text-base leading-relaxed text-ink2 md:text-lg"
+        >
+          {dict.sub}
+        </p>
+      </div>
 
       <div data-hero-cta className="mt-10 flex flex-wrap items-center justify-center gap-5">
         <Magnetic>

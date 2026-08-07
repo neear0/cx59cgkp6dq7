@@ -48,7 +48,7 @@ export default function Nav({ dict }: { dict: Dict["nav"] }) {
       <div className="glass mx-4 mt-4 flex items-center justify-between rounded-full px-6 py-4 md:mx-8">
         <a
           href="#top"
-          className="font-display text-sm font-bold tracking-[0.22em] text-ink"
+          className="-my-3 py-3 font-display text-sm font-bold tracking-[0.22em] text-ink"
         >
           DATIQA<span className="text-gradient">.AI</span>
         </a>
@@ -63,9 +63,10 @@ export default function Nav({ dict }: { dict: Dict["nav"] }) {
             </a>
           ))}
         </nav>
+        {/* the only nav link on small screens — padded to a real tap target */}
         <a
           href="#contact"
-          className="font-mono text-[11px] uppercase tracking-[0.25em] text-ink md:hidden"
+          className="-my-3 py-3 font-mono text-[11px] uppercase tracking-[0.25em] text-ink md:hidden"
         >
           {dict.contact}
         </a>

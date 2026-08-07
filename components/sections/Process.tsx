@@ -38,7 +38,11 @@ export default function Process({ dict }: { dict: Dict["process"] }) {
   );
 
   return (
-    <section ref={root} id="process" className="relative px-6 py-32 md:py-44">
+    <section
+      ref={root}
+      id="process"
+      className="relative px-6 py-32 md:px-12 md:py-44 lg:px-20"
+    >
       <div className="mx-auto max-w-6xl">
         {/* content keeps to the left — the particle formation flows right */}
         <div className="md:max-w-[36rem]">

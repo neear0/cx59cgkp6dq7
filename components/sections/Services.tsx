@@ -5,7 +5,10 @@ import type { Dict } from "@/lib/i18n";
 
 export default function Services({ dict }: { dict: Dict["services"] }) {
   return (
-    <section id="services" className="relative px-6 py-32 md:py-44">
+    <section
+      id="services"
+      className="relative px-6 py-32 md:px-12 md:py-44 lg:px-20"
+    >
       <div className="mx-auto max-w-6xl">
         {/* content keeps to the left — the particle formation flows right */}
         <div className="md:max-w-[38rem]">

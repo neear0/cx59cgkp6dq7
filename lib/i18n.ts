@@ -37,7 +37,26 @@ export interface Dict {
     heading: string;
     steps: { n: string; title: string; text: string }[];
   };
-  contact: { eyebrow: string; title: TriText; cta: string };
+  contact: {
+    eyebrow: string;
+    title: TriText;
+    cta: string;
+    form: {
+      eyebrow: string;
+      name: string;
+      email: string;
+      company: string;
+      message: string;
+      submit: string;
+      back: string;
+      required: string;
+      invalidEmail: string;
+      /** Subject line of the pre-filled mail the form hands off to. */
+      mailSubject: string;
+      successTitle: string;
+      successText: string;
+    };
+  };
   footer: { tagline: string; language: string };
 }
 
@@ -120,6 +139,21 @@ const en: Dict = {
       post: " of your data.",
     },
     cta: "Contact us",
+    form: {
+      eyebrow: "Tell us about it",
+      name: "Your name",
+      email: "Email",
+      company: "Company (optional)",
+      message: "How can we help?",
+      submit: "Send message",
+      back: "Back",
+      required: "This field is required",
+      invalidEmail: "Enter a valid email address",
+      mailSubject: "New enquiry from datiqa.ai",
+      successTitle: "Thank you",
+      successText:
+        "Your mail app should now be open with the message ready to send. If nothing happened, write to us directly at hello@datiqa.ai.",
+    },
   },
   footer: { tagline: "Turning data into meaningful innovation", language: "Language" },
 };
@@ -203,6 +237,21 @@ const sk: Dict = {
       post: " Vašich dát.",
     },
     cta: "Ozvite sa nám",
+    form: {
+      eyebrow: "Povedzte nám o tom",
+      name: "Vaše meno",
+      email: "E-mail",
+      company: "Firma (nepovinné)",
+      message: "S čím Vám môžeme pomôcť?",
+      submit: "Odoslať správu",
+      back: "Späť",
+      required: "Toto pole je povinné",
+      invalidEmail: "Zadajte platnú e-mailovú adresu",
+      mailSubject: "Nový dopyt z datiqa.ai",
+      successTitle: "Ďakujeme",
+      successText:
+        "Vo Vašom e-mailovom klientovi sa práve otvorila pripravená správa. Ak sa nič nestalo, napíšte nám priamo na hello@datiqa.ai.",
+    },
   },
   footer: { tagline: "Meníme dáta na zmysluplné inovácie", language: "Jazyk" },
 };
@@ -286,6 +335,21 @@ const cs: Dict = {
       post: " Vašich dat.",
     },
     cta: "Ozvěte se nám",
+    form: {
+      eyebrow: "Řekněte nám o tom",
+      name: "Vaše jméno",
+      email: "E-mail",
+      company: "Firma (nepovinné)",
+      message: "S čím Vám můžeme pomoci?",
+      submit: "Odeslat zprávu",
+      back: "Zpět",
+      required: "Toto pole je povinné",
+      invalidEmail: "Zadejte platnou e-mailovou adresu",
+      mailSubject: "Nová poptávka z datiqa.ai",
+      successTitle: "Děkujeme",
+      successText:
+        "Ve Vašem e-mailovém klientovi se právě otevřela připravená zpráva. Pokud se nic nestalo, napište nám přímo na hello@datiqa.ai.",
+    },
   },
   footer: { tagline: "Měníme data ve smysluplné inovace", language: "Jazyk" },
 };
