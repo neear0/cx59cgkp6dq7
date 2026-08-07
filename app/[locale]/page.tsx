@@ -25,7 +25,7 @@ export default async function Home({
     <SmoothScroll>
       <ParticleField />
       <Cursor />
-      <Nav dict={dict.nav} />
+      <Nav dict={dict.nav} locale={safeLocale} langLabel={dict.footer.language} />
       <main className="relative z-10">
         <Hero dict={dict.hero} />
         <Services dict={dict.services} />

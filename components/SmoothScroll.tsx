@@ -4,6 +4,7 @@ import { useEffect, type ReactNode } from "react";
 import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { registerLenis } from "@/lib/scroll-lock";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -14,6 +15,7 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
 
     const lenis = new Lenis({ lerp: 0.09, wheelMultiplier: 1 });
     lenis.on("scroll", ScrollTrigger.update);
+    registerLenis(lenis);
 
     const raf = (time: number) => lenis.raf(time * 1000);
     gsap.ticker.add(raf);
@@ -49,6 +51,9 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
 
       event.preventDefault();
       lenis.scrollTo(url.hash, {
+        // the mobile menu freezes Lenis while it is open, and its own links
+        // must still scroll when they close it
+        force: true,
         duration: 1.3,
         // ease in and out — an expo-out curve covers half the distance in the
         // first tenth of a second and still reads as a jump
@@ -66,6 +71,7 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
     return () => {
       document.removeEventListener("click", onClick);
       gsap.ticker.remove(raf);
+      registerLenis(null);
       lenis.destroy();
     };
   }, []);
