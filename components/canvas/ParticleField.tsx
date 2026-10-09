@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { Component, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
+import { scrollProgress } from "@/lib/scroll-progress";
 
 const COUNT = 12000;
 
@@ -45,7 +46,10 @@ const vertexShader = /* glsl */ `
     gl_PointSize = size * uPR * 12.0 / max(0.001, -mv.z);
 
     vSeed = aSeed;
-    vFade = smoothstep(15.0, 4.5, -mv.z);
+    // smoothstep() with edge0 > edge1 is undefined in GLSL — Apple GPUs
+    // (every browser on macOS runs WebGL on Metal) can return 0 for it and
+    // hide every point, so both fades are written as 1 - smoothstep(low, high)
+    vFade = 1.0 - smoothstep(4.5, 15.0, -mv.z);
   }
 `;
 
@@ -55,7 +59,7 @@ const fragmentShader = /* glsl */ `
 
   void main() {
     float d = length(gl_PointCoord - 0.5);
-    float alpha = smoothstep(0.5, 0.12, d);
+    float alpha = 1.0 - smoothstep(0.12, 0.5, d);
 
     // brand palette — mostly quiet grey, ~30 % of points carry the gradient
     vec3 grey   = vec3(0.88);
@@ -158,8 +162,7 @@ function Particles() {
     const mat = material.current;
     if (!mat) return;
 
-    const max = document.documentElement.scrollHeight - window.innerHeight;
-    const target = max > 0 ? window.scrollY / max : 0;
+    const target = scrollProgress();
     progress.current += (target - progress.current) * Math.min(1, delta * 3);
 
     mat.uniforms.uTime.value = state.clock.elapsedTime;
@@ -211,6 +214,23 @@ function Particles() {
   );
 }
 
+/**
+ * No WebGL (blocklisted GPU, disabled in settings, context limit hit) makes
+ * the Canvas throw, and an uncaught render error unmounts the whole page —
+ * the backdrop is decoration, so it just goes missing instead.
+ */
+class WebGLBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
+  state = { failed: false };
+
+  static getDerivedStateFromError() {
+    return { failed: true };
+  }
+
+  render() {
+    return this.state.failed ? null : this.props.children;
+  }
+}
+
 export default function ParticleField() {
   // mount the canvas client-side only — R3F's wrapper markup differs
   // between server and client and trips hydration otherwise
@@ -225,13 +245,15 @@ export default function ParticleField() {
       aria-hidden
     >
       {mounted && (
-        <Canvas
-          dpr={[1, 1.8]}
-          camera={{ position: [0, 0, 6], fov: 50 }}
-          gl={{ antialias: false, alpha: true, powerPreference: "high-performance" }}
-        >
-          <Particles />
-        </Canvas>
+        <WebGLBoundary>
+          <Canvas
+            dpr={[1, 1.8]}
+            camera={{ position: [0, 0, 6], fov: 50 }}
+            gl={{ antialias: false, alpha: true, powerPreference: "high-performance" }}
+          >
+            <Particles />
+          </Canvas>
+        </WebGLBoundary>
       )}
     </div>
   );

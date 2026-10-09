@@ -7,13 +7,15 @@ import "../globals.css";
 const syne = Syne({
   variable: "--font-syne",
   subsets: ["latin", "latin-ext"],
-  weight: ["600", "700", "800"],
+  // only the weights the markup uses (font-bold / font-extrabold) — every
+  // extra one is another file per subset to download
+  weight: ["700", "800"],
 });
 
 const instrument = Instrument_Sans({
   variable: "--font-instrument",
   subsets: ["latin", "latin-ext"],
-  weight: ["400", "500"],
+  weight: ["400"],
 });
 
 const spaceMono = Space_Mono({

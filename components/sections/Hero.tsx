@@ -52,7 +52,14 @@ export default function Hero({ dict }: { dict: Dict["hero"] }) {
       })
         .from(
           "[data-hero-sub]",
-          { autoAlpha: 0, y: 24, filter: "blur(8px)", duration: 1, ease: "power3.out" },
+          {
+            autoAlpha: 0,
+            y: 24,
+            filter: "blur(8px)",
+            duration: 1,
+            ease: "power3.out",
+            clearProps: "filter",
+          },
           "-=0.5"
         )
         .from(

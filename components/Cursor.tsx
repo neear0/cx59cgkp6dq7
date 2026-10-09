@@ -29,6 +29,10 @@ export default function Cursor() {
     const onMove = (e: MouseEvent) => {
       if (!shown) {
         gsap.to([dot, ring], { autoAlpha: 1, duration: 0.3 });
+        // the native cursor is only hidden once this one is actually on
+        // screen — hiding it from CSS alone left no cursor at all whenever
+        // this effect bailed out (e.g. macOS with "Reduce motion" turned on)
+        document.documentElement.classList.add("custom-cursor");
         shown = true;
       }
       dotX(e.clientX);
@@ -37,23 +41,29 @@ export default function Cursor() {
       ringY(e.clientY);
     };
 
+    // null until the first event, so the ring always settles from its fade-in
+    let hovering: boolean | null = null;
     const onOver = (e: MouseEvent) => {
-      const interactive = (e.target as HTMLElement).closest(
+      const interactive = !!(e.target as HTMLElement).closest(
         "a, button, [data-cursor]"
       );
+      if (interactive === hovering) return;
+      hovering = interactive;
       gsap.to(ring, {
         scale: interactive ? 2.1 : 1,
         opacity: interactive ? 0.9 : 0.5,
         duration: 0.35,
         ease: "power3.out",
+        overwrite: "auto",
       });
     };
 
-    window.addEventListener("mousemove", onMove);
-    window.addEventListener("mouseover", onOver);
+    window.addEventListener("mousemove", onMove, { passive: true });
+    window.addEventListener("mouseover", onOver, { passive: true });
     return () => {
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("mouseover", onOver);
+      document.documentElement.classList.remove("custom-cursor");
     };
   }, []);
 

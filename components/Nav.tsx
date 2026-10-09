@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import LangSwitcher from "./LangSwitcher";
 import { lockScroll } from "@/lib/scroll-lock";
+import { scrollProgress } from "@/lib/scroll-progress";
 import type { Dict, Locale } from "@/lib/i18n";
 
 export default function Nav({
@@ -32,11 +33,12 @@ export default function Nav({
 
   useEffect(() => {
     let raf = 0;
+    let last = -1;
     const update = () => {
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      const p = max > 0 ? window.scrollY / max : 0;
-      if (progressRef.current) {
+      const p = scrollProgress();
+      if (p !== last && progressRef.current) {
         progressRef.current.style.transform = `scaleX(${p})`;
+        last = p;
       }
       raf = requestAnimationFrame(update);
     };

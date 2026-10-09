@@ -43,13 +43,12 @@ body {
   color: #f5f5f5;
 }
 
-/* Hide native cursor on fine pointers — custom cursor takes over */
-@media (pointer: fine) {
-  body,
-  a,
-  button {
-    cursor: none;
-  }
+/* Hide the native cursor once the custom one has taken over — Cursor.tsx sets
+   the class, so wherever it doesn't run the native cursor stays */
+html.custom-cursor body,
+html.custom-cursor a,
+html.custom-cursor button {
+  cursor: none;
 }
 
 /* Gradient used only as detail, per brand rules */

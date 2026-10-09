@@ -88,6 +88,8 @@ export function FadeReveal({
       duration: 1.2,
       ease: "power3.out",
       delay,
+      // a finished blur(0px) would keep the block on its own filter layer
+      clearProps: "filter",
       scrollTrigger: { trigger: el, start: "top 88%", once: true },
     });
   }, [delay, y]);

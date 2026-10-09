@@ -77,6 +77,7 @@ export default function Contact({ dict }: { dict: Dict["contact"] }) {
           filter: "blur(0px)",
           duration: 0.7 * scale,
           ease: "power3.out",
+          clearProps: "filter",
           onComplete: () => {
             if (next) nameRef.current?.focus({ preventScroll: true });
           },
